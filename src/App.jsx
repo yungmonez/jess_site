@@ -329,6 +329,7 @@ const ContactForm = () => {
     }, 1500);
   };
 
+  // Formspree integration
   if (isSubmitted) {
     return (
       <div className="form-wrapper" style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2rem'}}>
@@ -342,25 +343,26 @@ const ContactForm = () => {
 
   return (
     <div className="form-wrapper">
-      <form onSubmit={handleSubmit}>
+      <form
+        action="https://formspree.io/f/mbdaoyye"
+        method="POST"
+        onSubmit={() => setIsSubmitted(true)}
+      >
         <div className="form-field">
           <label className="form-label">Full Name</label>
-          <input className="form-input" placeholder="jane doe" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-          {errors.name && <span className="form-error">{errors.name}</span>}
+          <input className="form-input" name="name" placeholder="jane doe" required />
         </div>
         <div className="form-field">
           <label className="form-label">Email Address</label>
-          <input className="form-input" placeholder="email@address.com" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
-          {errors.email && <span className="form-error">{errors.email}</span>}
+          <input className="form-input" name="email" type="email" placeholder="email@address.com" required />
         </div>
         <div className="form-field">
           <label className="form-label">Phone Number</label>
-          <input className="form-input" placeholder="(555) 123-4567" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
-          {errors.phone && <span className="form-error">{errors.phone}</span>}
+          <input className="form-input" name="phone" placeholder="(555) 123-4567" required />
         </div>
         <div className="form-field">
           <label className="form-label">Subject</label>
-          <select className="form-input" style={{appearance: 'none', fontStyle: 'normal', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.4em'}} value={formData.subject} onChange={e => setFormData({...formData, subject: e.target.value})}>
+          <select className="form-input" name="subject" style={{appearance: 'none', fontStyle: 'normal', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.4em'}} required>
             <option>Surgical Consultation</option>
             <option>Cosmetic Treatment</option>
             <option>Medical Screening</option>
@@ -368,11 +370,10 @@ const ContactForm = () => {
         </div>
         <div className="form-field">
           <label className="form-label">Message</label>
-          <textarea className="form-input" placeholder="How can we help you?" value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} style={{minHeight: '80px', resize: 'vertical'}} />
-          {errors.message && <span className="form-error">{errors.message}</span>}
+          <textarea className="form-input" name="message" placeholder="How can we help you?" style={{minHeight: '80px', resize: 'vertical'}} required />
         </div>
-        <button type="submit" className="btn-submit" disabled={isSubmitting}>
-          {isSubmitting ? <Loader2 size={14} style={{animation: 'spin 1s linear infinite'}} /> : 'Send Inquiry'}
+        <button type="submit" className="btn-submit">
+          Send Inquiry
         </button>
       </form>
     </div>
