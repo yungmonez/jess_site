@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Microscope, Zap, Heart, ArrowRight, ChevronLeft, Loader2, Menu, X } from 'lucide-react';
+import { Microscope, Zap, Heart, ArrowRight, ChevronLeft } from 'lucide-react';
 import profileImg from './assets/jg_photo.png';
 
 /**
@@ -303,50 +303,13 @@ const styles = `
 `;
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: 'Surgical Consultation', message: '' });
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.name) newErrors.name = 'Required';
-    if (!formData.email || !formData.email.includes('@')) newErrors.email = 'Valid email required';
-    if (!formData.phone) newErrors.phone = 'Required';
-    if (!formData.message) newErrors.message = 'Required';
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const valErrors = validate();
-    if (Object.keys(valErrors).length > 0) return setErrors(valErrors);
-    
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1500);
-  };
-
-  // Formspree integration
-  if (isSubmitted) {
-    return (
-      <div className="form-wrapper" style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2rem'}}>
-        <div style={{width: '3rem', height: '3rem', background: '#000', color: '#fff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}><ArrowRight size={20}/></div>
-        <h3 className="font-serif" style={{fontStyle: 'normal', fontSize: '1.5rem'}}>Thank you.</h3>
-        <p className="body-text" style={{fontSize: '0.875rem'}}>Your inquiry has been received. We will contact you shortly.</p>
-        <button onClick={() => setIsSubmitted(false)} style={{background: 'none', border: 'none', color: 'var(--stone-400)', textTransform: 'uppercase', fontSize: '9px', letterSpacing: '0.4em', cursor: 'pointer'}}>Send another</button>
-      </div>
-    );
-  }
+  // Formspree handles form submission and redirects to a confirmation page
 
   return (
     <div className="form-wrapper">
       <form
         action="https://formspree.io/f/mbdaoyye"
         method="POST"
-        onSubmit={() => setIsSubmitted(true)}
       >
         <div className="form-field">
           <label className="form-label">Full Name</label>
