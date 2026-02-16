@@ -1,16 +1,87 @@
-# React + Vite
+# Jess Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal website for Dr. J. Garelik built with React and Vite.
 
-Currently, two official plugins are available:
+## Live Site
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The site is available at: **https://www.drjgarelik.com**
 
-## React Compiler
+## Deployment
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This site is deployed to GitHub Pages with a custom domain configuration.
 
-## Expanding the ESLint configuration
+### Deploying Updates
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+To deploy changes to the live site:
+
+```bash
+npm run deploy
+```
+
+This will:
+1. Build the production bundle (`npm run build`)
+2. Deploy the `dist` folder to the `gh-pages` branch
+3. The site will be live at www.drjgarelik.com
+
+### Custom Domain Setup
+
+The site uses a custom domain (`www.drjgarelik.com`) configured via:
+
+1. **CNAME File**: Located in `public/CNAME` containing `www.drjgarelik.com`
+2. **DNS Configuration**: Your domain registrar must have the following DNS records:
+   - **CNAME record**: `www` → `yungmonez.github.io`
+   - Alternatively, for apex domain:
+     - **A records** pointing to GitHub Pages IPs:
+       - `185.199.108.153`
+       - `185.199.109.153`
+       - `185.199.110.153`
+       - `185.199.111.153`
+     - **CNAME record**: `www` → `yungmonez.github.io`
+
+3. **GitHub Pages Settings**: 
+   - Repository → Settings → Pages
+   - Source: Deploy from branch `gh-pages`
+   - Custom domain: `www.drjgarelik.com`
+   - Enforce HTTPS: Enabled (recommended)
+
+### Troubleshooting
+
+If the site shows a 404 error:
+- Verify DNS records are properly configured at your domain registrar
+- Confirm the CNAME file exists in the `gh-pages` branch
+- Check GitHub Pages settings in the repository
+- DNS propagation can take up to 48 hours
+
+## Development
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Development Server
+
+```bash
+npm run dev
+```
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## Tech Stack
+
+- React 19
+- Vite 7
+- Lucide React (icons)
+- ESLint (code quality)
+- gh-pages (deployment)
