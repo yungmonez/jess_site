@@ -69,6 +69,7 @@ const styles = `
     background: none;
     border: none;
     cursor: pointer;
+    color: var(--text-muted);
   }
 
   .nav-links {
@@ -268,6 +269,8 @@ const styles = `
       padding: 0 1rem;
     }
     .nav-links { display: none; }
+    .nav { padding: 1rem 0; }
+    main { padding-top: 5rem; }
     .section {
       padding: 2.5rem 0;
     }
@@ -378,7 +381,7 @@ const Home = ({ setPage }) => (
           <p className="body-text">
             Dr. Jessica Garelik is a board-certified dermatologist. Her practice philosophy focuses on delivering natural, effortlessly beautiful results that showcase and enhance your natural beauty.
           </p>
-          <button onClick={() => { setPage('bio'); window.scrollTo(0, 0); }} style={{background: 'none', border: 'none', borderBottom: '1px solid #000', paddingBottom: '0.5rem', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '10px', letterSpacing: '0.5em', marginTop: '2rem', cursor: 'pointer'}}>
+          <button onClick={() => { setPage('bio'); window.scrollTo(0, 0); }} style={{background: 'none', border: 'none', borderBottom: '1px solid #000', paddingBottom: '0.5rem', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '10px', letterSpacing: '0.5em', marginTop: '2rem', cursor: 'pointer', color: 'var(--text)'}}>
             Read the Full Bio <ArrowRight size={14} style={{marginLeft: '0.5rem'}}/>
           </button>
         </div>
