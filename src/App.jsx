@@ -104,6 +104,10 @@ const styles = `
     align-items: center;
   }
 
+  .about-hero-grid {
+    grid-template-columns: 1fr 1.5fr;
+  }
+
   .image-box {
     aspect-ratio: 3/4;
     background: var(--bg);
@@ -217,7 +221,7 @@ const styles = `
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.5em;
-    color: var(--stone-400);
+    color: var(--text);
     margin-bottom: 1rem;
     display: block;
   }
@@ -231,6 +235,10 @@ const styles = `
     font-style: normal;
     font-size: 1.25rem;
   }
+  .form-input::placeholder { color: var(--stone-300); opacity: 1; }
+  .form-input::-webkit-input-placeholder { color: var(--stone-300); }
+  .form-input:-ms-input-placeholder { color: var(--stone-300); }
+  .form-input::-ms-input-placeholder { color: var(--stone-300); }
 
   .form-error {
     font-size: 10px;
@@ -302,6 +310,9 @@ const styles = `
     footer {
       padding: 2rem 0 !important;
     }
+    .about-hero-grid {
+      grid-template-columns: 1fr !important;
+    }
   }
 `;
 
@@ -316,7 +327,7 @@ const ContactForm = () => {
       >
         <div className="form-field">
           <label className="form-label">Full Name</label>
-          <input className="form-input" name="name" placeholder="jane doe" required />
+          <input className="form-input" name="name" placeholder="Name" required />
         </div>
         <div className="form-field">
           <label className="form-label">Email Address</label>
@@ -324,11 +335,11 @@ const ContactForm = () => {
         </div>
         <div className="form-field">
           <label className="form-label">Phone Number</label>
-          <input className="form-input" name="phone" placeholder="(555) 123-4567" required />
+          <input className="form-input" name="phone" placeholder="(212) 123-4567" required />
         </div>
         <div className="form-field">
           <label className="form-label">Subject</label>
-          <select className="form-input" name="subject" style={{appearance: 'none', fontStyle: 'normal', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.4em'}} required>
+          <select className="form-input" name="subject" style={{fontStyle: 'normal', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.4em'}} required>
             <option>Surgical Consultation</option>
             <option>Cosmetic Treatment</option>
             <option>Medical Screening</option>
@@ -351,7 +362,7 @@ const AboutPage = ({ setPage }) => (
     <button onClick={() => setPage('home')} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', color: 'var(--stone-400)', textTransform: 'uppercase', fontSize: '10px', letterSpacing: '0.4em', marginBottom: '5rem', cursor: 'pointer'}}>
       <ChevronLeft size={14}/> Back to Home
     </button>
-    <div className="hero-grid" style={{gridTemplateColumns: '1fr 1.5fr'}}>
+    <div className="hero-grid about-hero-grid">
       <div className="image-box" style={{aspectRatio: '3/4'}}>
         <img src={profileImg} alt="Jess Garelik" />
       </div>
@@ -417,13 +428,13 @@ const Home = ({ setPage }) => (
           <div style={{display: 'flex', flexDirection: 'column', gap: '3rem', marginTop: '4rem'}}>
             <div style={{display: 'flex', flexDirection: 'column', gap: '0.75rem'}}>
               <span className="label" style={{margin: 0}}>Location</span>
-              <p style={{fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.3em', margin: 0}}>123 Main Street</p>
-              <p style={{fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.3em', margin: 0}}>Floor 3</p>
-              <p style={{fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.3em', margin: 0}}>New York, NY 10001</p>
+              <p style={{fontSize: '14px', textTransform: 'none', letterSpacing: '0.3em', margin: 0}}>110 E 60th St.</p>
+              <p style={{fontSize: '14px', textTransform: 'none', letterSpacing: '0.3em', margin: 0}}>Suite 1002</p>
+              <p style={{fontSize: '14px', textTransform: 'none', letterSpacing: '0.3em', margin: 0}}>New York, NY 10022</p>
             </div>
             <div style={{display: 'flex', flexDirection: 'column', gap: '0.75rem'}}>
               <span className="label" style={{margin: 0}}>Contact</span>
-              <p style={{fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.3em'}}>hello@jessgarelik.com</p>
+              <p style={{fontSize: '14px', textTransform: 'lowercase', letterSpacing: '0.3em'}}>hello@drjgarelik.com</p>
             </div>
           </div>
         </div>
