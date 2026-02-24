@@ -57,7 +57,7 @@ const styles = `
 
   .nav-inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
   }
 
@@ -75,6 +75,7 @@ const styles = `
   .nav-links {
     display: flex;
     gap: 3.5rem;
+    margin-left: auto;
   }
 
   .nav-links button {
@@ -159,6 +160,7 @@ const styles = `
     font-weight: 300;
     max-width: 500px;
   }
+  .body-text p { margin: 0; }
 
   /* Focus Cards */
   .focus-section {
@@ -362,17 +364,18 @@ const AboutPage = ({ setPage }) => (
     <button onClick={() => setPage('home')} style={{display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', color: 'var(--stone-400)', textTransform: 'uppercase', fontSize: '10px', letterSpacing: '0.4em', marginBottom: '5rem', cursor: 'pointer'}}>
       <ChevronLeft size={14}/> Back to Home
     </button>
-    <div className="hero-grid about-hero-grid">
+        <div className="hero-grid about-hero-grid">
       <div className="image-box" style={{aspectRatio: '3/4'}}>
         <img src={profileImg} alt="Jess Garelik" />
       </div>
       <div>
         <h1 className="font-serif hero-quote" style={{fontSize: '4rem', marginBottom: '4rem', textTransform: 'none'}}>Dr. Jessica Garelik</h1>
-        <div className="body-text" style={{maxWidth: 'none', display: 'flex', flexDirection: 'column', gap: '2rem'}}>
+        	<div className="body-text" style={{maxWidth: 'none', display: 'flex', flexDirection: 'column', gap: '1rem'}}>
           <p>Dr. Jessica Garelik is a board-certified dermatologist with advanced fellowship training in cosmetics and lasers. She offers innovative, science-driven medical and aesthetic dermatologic care in Manhattan.</p>
           <p>She completed a Dermatologic Laser Surgery and Aesthetic Dermatology Fellowship at the University of Toronto and dermatology residency at Albert Einstein College of Medicine in New York. Prior to residency training, she completed research fellowships in Dermatopharmacology at Albert Einstein College of Medicine and New York University. She previously worked as an Assistant Professor of Dermatology at New York University, in New York, and Northwestern University, Feinberg School of Medicine, in Chicago.</p>
           <p>Dr. Garelik has authored peer-reviewed journal articles and presented her research at national dermatology conferences. She is also active in many professional organizations such as The American Academy of Dermatology, the American Society for Dermatologic Surgery, the Women’s Dermatologic Society, and the American Society for Laser Medicine and Surgery.</p>
-          <p>Over the last decade, she has developed an expertise in medical therapies, cosmetic injectables, laser and energy-based devices, and positive aging treatments. Her holistic and personalized approach combines medical and procedural aesthetic treatment strategies to optimize skin health. She is passionate about providing the highest quality, comprehensive care that is tailored with intention to best serve her patients’ medical and aesthetic dermatologic needs. Dr. Garelik is also passionate about using evidence-based pharmacotherapy, including GLP-1 agonists, as well as lifestyle and behavioral treatment strategies to optimize skin health, wellbeing, and longevity.</p>
+          <p>Over the last decade, she has developed an expertise in medical therapies, cosmetic injectables, laser and energy-based devices, and positive aging treatments. Her holistic and personalized approach combines medical and procedural aesthetic treatment strategies to optimize skin health.</p>
+          <p>She is passionate about providing the highest quality, comprehensive care that is tailored with intention to best serve her patients’ medical and aesthetic dermatologic needs. Dr. Garelik is also passionate about using evidence-based pharmacotherapy, including GLP-1 agonists, as well as lifestyle and behavioral treatment strategies to optimize skin health, wellbeing, and longevity.</p>
         </div>
       </div>
     </div>
@@ -388,9 +391,9 @@ const Home = ({ setPage }) => (
         </div>
         <div className="hero-text">
           <span className="label">The Approach</span>
-          <h2 className="font-serif hero-quote">"To effortlessly showcase and enhance your natural beauty and elevate your self-confidence."</h2>
-          <p className="body-text">
-            Dr. Jessica Garelik is a board-certified dermatologist. Her practice philosophy focuses on delivering natural, effortlessly beautiful results that showcase and enhance your natural beauty.
+          <p style={{marginTop: '1rem', fontSize: '1.75rem', lineHeight: 1.4, fontWeight: 300, maxWidth: '560px'}}>
+            <span style={{color: 'var(--text)', fontWeight: 700}}>Dr. Jessica Garelik is a board-certified dermatologist with advanced fellowship training in cosmetics and lasers. She offers innovative, science-driven medical and aesthetic dermatologic care in Manhattan.</span>{' '}
+            <span style={{color: 'var(--text-muted)', fontWeight: 300}}>Her practice philosophy focuses on delivering natural, effortlessly beautiful results that showcase and enhance your natural beauty.</span>
           </p>
           <button onClick={() => { setPage('bio'); window.scrollTo(0, 0); }} style={{background: 'none', border: 'none', borderBottom: '1px solid #000', paddingBottom: '0.5rem', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '10px', letterSpacing: '0.5em', marginTop: '2rem', cursor: 'pointer', color: 'var(--text)'}}>
             Read the Full Bio <ArrowRight size={14} style={{marginLeft: '0.5rem'}}/>
@@ -435,6 +438,7 @@ const Home = ({ setPage }) => (
             <div style={{display: 'flex', flexDirection: 'column', gap: '0.75rem'}}>
               <span className="label" style={{margin: 0}}>Contact</span>
               <p style={{fontSize: '14px', textTransform: 'lowercase', letterSpacing: '0.3em'}}>hello@drjgarelik.com</p>
+              <p style={{fontSize: '14px', textTransform: 'none', letterSpacing: '0.3em', margin: 0}}>646-452-8111</p>
             </div>
           </div>
         </div>
@@ -455,11 +459,21 @@ export default function App() {
   }, []);
 
   const handleNav = (id) => {
+    const scrollToId = () => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const navEl = document.querySelector('.nav');
+      const navHeight = navEl ? navEl.offsetHeight : 80;
+      const extraGap = 12; // small breathing room above the section
+      const top = el.getBoundingClientRect().top + window.scrollY - (navHeight + extraGap);
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
+
     if (page !== 'home') {
       setPage('home');
-      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 100);
+      setTimeout(scrollToId, 120);
     } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      scrollToId();
     }
   };
 
